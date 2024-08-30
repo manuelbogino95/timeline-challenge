@@ -37,10 +37,15 @@ export function useTimelineEvents({
 		});
 	}
 
+	function deleteEvent(id: number) {
+		setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
+	}
+
 	return {
 		lanes,
 		events,
 		timeline,
 		updateEvent,
+		deleteEvent,
 	};
 }

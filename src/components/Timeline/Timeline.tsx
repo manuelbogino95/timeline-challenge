@@ -21,7 +21,7 @@ import {
 import { TimelineEvent } from "../../types";
 
 export function Timeline() {
-	const { lanes, timeline, updateEvent } = useTimelineEvents({
+	const { lanes, timeline, updateEvent, deleteEvent } = useTimelineEvents({
 		defaultEvents: timelineItems,
 	});
 	const [zoomLevel, setZoomLevel] = useState(defaultZoom);
@@ -91,6 +91,7 @@ export function Timeline() {
 												startIndex={startIndex}
 												endIndex={endIndex}
 												onSave={updateEvent}
+												onDelete={deleteEvent}
 											/>
 										);
 									})}
