@@ -58,6 +58,7 @@ export function Timeline() {
 										/>
 									);
 								})}
+								<div className="col-span-full border-b border-slate-200" />
 							</>
 						);
 					})}
