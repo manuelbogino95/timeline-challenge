@@ -4,7 +4,7 @@ import { useTimelineEvents } from "../../hooks/useTimelineEvents";
 import timelineItems from "../../timelineItems";
 
 export function Timeline() {
-	const { events, timeline } = useTimelineEvents({
+	const { lanes, timeline } = useTimelineEvents({
 		defaultEvents: timelineItems,
 	});
 
@@ -19,17 +19,23 @@ export function Timeline() {
 				{timeline.map((date) => (
 					<ColumnHeader key={date} title={date} />
 				))}
-				{events.map((event) => {
-					const startIndex = timeline.indexOf(event.start);
-					const endIndex = timeline.indexOf(event.end);
-
+				{lanes.map((lane) => {
 					return (
-						<Event
-							key={event.id}
-							event={event}
-							startIndex={startIndex}
-							endIndex={endIndex}
-						/>
+						<>
+							{lane.map((event) => {
+								const startIndex = timeline.indexOf(event.start);
+								const endIndex = timeline.indexOf(event.end);
+
+								return (
+									<Event
+										key={event.id}
+										event={event}
+										startIndex={startIndex}
+										endIndex={endIndex}
+									/>
+								);
+							})}
+						</>
 					);
 				})}
 			</div>

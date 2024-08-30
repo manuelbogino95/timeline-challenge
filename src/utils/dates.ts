@@ -17,3 +17,26 @@ export function createTimeline(startDate: string, endDate: string): string[] {
 export function orderEvents(events: TimelineEvent[]) {
 	return events.sort((a, b) => dayjs(a.start).diff(b.start, "day"));
 }
+
+export function arrangeEventsInLanes(events: TimelineEvent[]) {
+	const lanes: TimelineEvent[][] = [];
+
+	events.forEach((event) => {
+		let placed = false;
+		for (const lane of lanes) {
+			const lastEventInLane = lane[lane.length - 1];
+
+			if (dayjs(event.start).isAfter(lastEventInLane.end)) {
+				lane.push(event);
+				placed = true;
+				break;
+			}
+		}
+
+		if (!placed) {
+			lanes.push([event]);
+		}
+	});
+
+	return lanes;
+}

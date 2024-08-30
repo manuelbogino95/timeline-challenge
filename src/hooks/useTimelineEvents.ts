@@ -1,5 +1,10 @@
+import { useMemo } from "react";
 import dayjs from "dayjs";
-import { createTimeline, orderEvents } from "../utils/dates";
+import {
+	arrangeEventsInLanes,
+	createTimeline,
+	orderEvents,
+} from "../utils/dates";
 import { TimelineEvent } from "../types";
 
 export function useTimelineEvents({
@@ -14,8 +19,10 @@ export function useTimelineEvents({
 		events[0].end
 	);
 	const timeline = createTimeline(firstDate, lastDate);
+	const lanes = useMemo(() => arrangeEventsInLanes(events), [events]);
 
 	return {
+		lanes,
 		events,
 		timeline,
 	};
