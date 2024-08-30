@@ -12,7 +12,7 @@ import {
 } from "../../utils/constants";
 
 export function Timeline() {
-	const { lanes, timeline } = useTimelineEvents({
+	const { lanes, timeline, updateEvent } = useTimelineEvents({
 		defaultEvents: timelineItems,
 	});
 	const [zoomLevel, setZoomLevel] = useState(defaultZoom);
@@ -55,6 +55,7 @@ export function Timeline() {
 											event={event}
 											startIndex={startIndex}
 											endIndex={endIndex}
+											onSave={updateEvent}
 										/>
 									);
 								})}
